@@ -20,6 +20,10 @@ def writeFile(rfile):
 
 def main():
 
+    @app.route("/")
+    def hello():
+        return "Hello World!"
+
     @app.route("/forecast")
     def forecast():
         data = writeFile("R_STOCK=" + request.args.get('stock') +" Rscript --vanilla Stock-forecast.r > /tmp/out.txt")
