@@ -10,7 +10,7 @@ def writeFile(rfile):
 
     subprocess.call(rfile, shell=True)
 
-    with open('/tmp/out.txt') as output:
+    with open('out.txt') as output:
         data = output.readlines()
         # print("data", data)
 
@@ -26,17 +26,17 @@ def main():
 
     @app.route("/forecast")
     def forecast():
-        data = writeFile("R_STOCK=" + request.args.get('stock') +" Rscript --vanilla Stock-forecast.r > /tmp/out.txt")
+        data = writeFile("R_STOCK=" + request.args.get('stock') +" Rscript --vanilla Stock-forecast.r > out.txt")
         return ", ".join(data)
 
     @app.route("/single")
     def single():
-        data1 = writeFile("R_STOCK=" + request.args.get('stock') +" Rscript --vanilla beta-of-single-stock.r > /tmp/out.txt")
+        data1 = writeFile("R_STOCK=" + request.args.get('stock') +" Rscript --vanilla beta-of-single-stock.r > out.txt")
         return str(data1[0])
 
     @app.route("/portfolioresults")
     def portfolioresults():
-        data3 = writeFile("R_RISK="+ request.args.get('risk') + " Rscript --vanilla portfolio-results.r > /tmp/out.txt")
+        data3 = writeFile("R_RISK="+ request.args.get('risk') + " Rscript --vanilla portfolio-results.r > out.txt")
         return ", ".join(data3)
 
 main()
